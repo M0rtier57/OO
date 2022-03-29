@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class WPS {
     private String pincode;
+    private String test;
 
     public WPS() {
 
