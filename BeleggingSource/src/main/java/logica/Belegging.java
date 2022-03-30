@@ -6,21 +6,29 @@ public class Belegging {
     private double[] jaarrendementen;
 
     public Belegging(String naam, int investeringsbedrag, double[] jaarrendementen) {
-        this.naam = naam;
-        if(investeringsbedrag >= 0) {
+        if(naam != null && naam != "") {
+            this.naam = naam;
+        } else {
+            throw new IllegalArgumentException("Dit is een ongeldige naam");
+        }
+        if(investeringsbedrag > 0) {
             this.investeringsbedrag = investeringsbedrag;
         } else {
-            new IllegalArgumentException("Je kan geen bedrag onder 0 investeren");
+            throw new IllegalArgumentException("Je kan geen bedrag onder 0 investeren");
         }
         this.jaarrendementen = jaarrendementen;
     }
 
     public Belegging(String naam, int investeringsbedrag) {
-        this.naam = naam;
+        if(naam != null && naam != "") {
+            this.naam = naam;
+        } else {
+            throw new IllegalArgumentException("Dit is een ongeldige naam");
+        }
         if(investeringsbedrag >= 0) {
             this.investeringsbedrag = investeringsbedrag;
         } else {
-            new IllegalArgumentException("Je kan geen bedrag onder 0 investeren");
+            throw new IllegalArgumentException("Je kan geen bedrag onder 0 investeren");
         }
     }
 
@@ -41,7 +49,7 @@ public class Belegging {
         double procentvanwaarde;
         for (int i = 0; i < jaarrendementen.length; i++){
             procentvanwaarde = (waarde/100) * jaarrendementen[i];
-            waarde = (waarde + procentvanwaarde);
+            waarde = waarde + procentvanwaarde;
         }
         return (int) waarde;
     }
@@ -58,23 +66,49 @@ public class Belegging {
         return (int) som;
     }
 
-    public int getMeetkundigRendement(){
-        return 0;
+    public double getMeetkundigRendement(){
+        return ((double) getOpbrengst() / investeringsbedrag) * 100;
     }
 
-    public int getGemiddeldRendement() {
-        return jaarrendementen.length/getMeetkundigRendement();
+    public double getGemiddeldRendement() {
+        return getMeetkundigRendement() / jaarrendementen.length;
     }
 
-    public int getRendement(Rendement rekenkundig) {
-        return 0;
+    public double getRendement(Rendement rekenkundig) {
+        double rendement = 0;
+        switch (rekenkundig) {
+            case REKENKUNDIG:
+                rendement = (double) getRekenkundigRendement();
+                break;
+            case MEETKUNDIG:
+                rendement = getMeetkundigRendement();
+                break;
+            case GEMIDDELD:
+                rendement = getGemiddeldRendement();
+                break;
+            default:
+                throw new IllegalArgumentException("Dit is geen geldig rendements type.");
+        }
+        return rendement;
     }
 
     public void setJaarrendementen(double jaarrendementen[]) {
+        this.jaarrendementen = jaarrendementen;
+    }
+
+    public void setJaarrendement(double jaarrendement, int jaar) {
 
     }
 
-    public void setJaarrendement(double jaarrendementen, int jaar) {
+    public String toString() {
+        return getNaam() + "(" + getMeetkundigRendement() + "% rendement op " + getJaarrendementen().length + ")";
+    }
 
+    public boolean equals(Belegging belegging) {
+        if(getGemiddeldRendement() == belegging.getGemiddeldRendement()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

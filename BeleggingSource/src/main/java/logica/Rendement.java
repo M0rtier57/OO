@@ -5,5 +5,4 @@ public enum Rendement {
         MEETKUNDIG,
         GEMIDDELD,
         GEANNUALISEERD,
-        GELD_GEWOGEN
 }
