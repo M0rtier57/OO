@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/OO.iml" filepath="$PROJECT_DIR$/.idea/OO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WPS/WPS/WPS.iml" filepath="$PROJECT_DIR$/WPS/WPS/WPS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BeleggingSource/rendement.iml" filepath="$PROJECT_DIR$/BeleggingSource/rendement.iml" />
+    </modules>
+  </component>
+</project>
