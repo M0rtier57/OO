@@ -12,7 +12,7 @@ public class Rapport {
     }
 
     public double geefGewogenResultaatProcent() {
-
+        double procent = ()
     }
 
     public Graad geefGraad() {
