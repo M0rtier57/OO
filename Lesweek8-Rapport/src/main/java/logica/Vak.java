@@ -51,12 +51,10 @@ public class Vak {
         this.score = score;
     }
 
-    public boolean equals(Vak vak) {
-       if(this.naam.compareTo(vak.getNaam()) == 0) {
-           return true;
-       } else {
-           return false;
-       }
+    @Override
+    public boolean equals(Object o) {
+       if (!(o instanceof Vak)) return false;
+       return this.naam.equals(((Vak)o).naam);
     }
 
     public String toString() {

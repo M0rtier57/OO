@@ -12,14 +12,36 @@ public class Rapport {
     }
 
     public double geefGewogenResultaatProcent() {
-        double procent = ()
+        int totaal = 0;
+        int totaalstp = 0;
+
+        for(int i = 0; i < this.vakken.length; i++) {
+            totaal = totaal + (vakken[i].getScore() * (vakken[i].getStp()));
+            totaalstp = totaalstp + (vakken[i].getStp());
+        }
+        double procent = (totaal/(double)totaalstp) * 5;
+        return Helper.afronden(procent, 2);
     }
 
     public Graad geefGraad() {
+        if(geefGewogenResultaatProcent() < 0 || geefGewogenResultaatProcent() > 100) {
+            throw new IllegalArgumentException("ongeldig resultaat");
+        }
+        else if(geefGewogenResultaatProcent() < 50) {
+            return Graad.NIET_GESLAAGD;
+        } else if (geefGewogenResultaatProcent() < 65) {
+            return Graad.VOLDOENING;
+        } else if (geefGewogenResultaatProcent() < 75) {
+            return Graad.ONDERSCHEIDING;
+        } else if (geefGewogenResultaatProcent() < 85) {
+            return Graad.GROTE_ONDERSCHEIDING;
+        } else {
+            return Graad.GROOTSTE_ONDERSCHEIDING;
+        }
 
     }
 
     public String toString() {
-
+        return "";
     }
 }
