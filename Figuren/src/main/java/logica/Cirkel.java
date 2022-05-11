@@ -7,7 +7,6 @@ public class Cirkel extends Figuur {
 
     public Cirkel() {
         this.straal = 50.0;
-        Figuur cirkel = new Figuur() {
         Figuur cirkel = new Figuur();
     }
 
