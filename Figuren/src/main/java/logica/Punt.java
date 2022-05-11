@@ -28,7 +28,9 @@ public class Punt {
     }
 
     public double berekenAfstand(Punt punt) {
-
+        double a = Math.pow(punt.getX() - this.x, 2);
+        double b = Math.pow(punt.getY() - this.y, 2);
+        return Math.sqrt(a + b);
     }
 
     @Override
