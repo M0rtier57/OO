@@ -46,11 +46,6 @@ abstract public class Figuur {
         return dikteRand == figuur.dikteRand && kleur == figuur.kleur && kleurRand == figuur.kleurRand && Objects.equals(middelpunt, figuur.middelpunt);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(kleur, kleurRand, dikteRand, middelpunt);
-    }
-
     public int getDikteRand() {
         return dikteRand;
     }

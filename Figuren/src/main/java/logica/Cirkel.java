@@ -6,22 +6,18 @@ public class Cirkel extends Figuur {
     private double straal;
 
     public Cirkel() {
+        super();
         this.straal = 50.0;
-        Figuur cirkel = new Figuur();
     }
 
     public Cirkel(double straal) {
+        super();
         this.straal = straal;
-        Figuur cirkel = new Figuur();
-        cirkel.berekenOppervlakte();
-        cirkel.berekenOmtrek();
     }
 
     public Cirkel(double straal, Kleur kleur, Kleur kleurRand, int dikteRand) {
+        super(kleur, kleurRand, dikteRand);
         this.straal = straal;
-        Figuur cirkel = new Figuur(kleur, kleurRand, dikteRand);
-        cirkel.berekenOppervlakte();
-        cirkel.berekenOmtrek();
     }
 
     public Cirkel(Punt middelpunt, double straal) {
@@ -52,7 +48,7 @@ public class Cirkel extends Figuur {
     public String toString() {
         return "Cirkel{" +
                 "straal=" + straal +
-                '}';
+                '}' + super.toString();
     }
 
     @Override
@@ -60,7 +56,8 @@ public class Cirkel extends Figuur {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cirkel cirkel = (Cirkel) o;
-        return Double.compare(cirkel.straal, straal) == 0;
+        if(this.straal == cirkel.straal && super.equals(cirkel)) return true;
+        return false;
     }
 
     @Override
