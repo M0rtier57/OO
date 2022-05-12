@@ -12,24 +12,30 @@ public class Cirkel extends Figuur {
 
     public Cirkel(double straal) {
         super();
+        if(straal < 0) throw new IllegalArgumentException("straal moet groter dan 0 zijn");
         this.straal = straal;
     }
 
     public Cirkel(double straal, Kleur kleur, Kleur kleurRand, int dikteRand) {
         super(kleur, kleurRand, dikteRand);
+        if(dikteRand < 0) throw new IllegalArgumentException("dikte rand kan niet negatief zijn");
+        if(straal < 0) throw new IllegalArgumentException("straal kan niet negatief zijn");
         this.straal = straal;
     }
 
     public Cirkel(Punt middelpunt, double straal) {
+        super();
+        if(straal < 0) throw new IllegalArgumentException("straal moet groter dan 0 zijn");
         this.straal = straal;
-        Figuur cirkel = new Figuur();
-        cirkel.setMiddelpunt(middelpunt);
+        super.setMiddelpunt(middelpunt);
     }
 
     public Cirkel(Punt middelpunt, double straal, Kleur kleur, Kleur kleurRand, int dikteRand) {
+        super(kleur, kleurRand, dikteRand);
+        if(dikteRand < 0) throw new IllegalArgumentException("dikte rand kan niet negatief zijn");
+        if(straal < 0) throw new IllegalArgumentException("straal moet groter dan 0 zijn");
         this.straal = straal;
-        Figuur cirkel = new Figuur(kleur, kleurRand, dikteRand);
-        cirkel.setMiddelpunt(middelpunt);
+        super.setMiddelpunt(middelpunt);
     }
 
     public double getStraal() {
