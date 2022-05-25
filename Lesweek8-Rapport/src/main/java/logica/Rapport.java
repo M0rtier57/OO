@@ -3,6 +3,11 @@ package logica;
 public class Rapport {
     private Vak[] vakken;
 
+    public Rapport() {
+        Vak[] vakkendefault = {};
+        this.vakken = vakkendefault;
+    }
+
     public Rapport(Vak[] vakken) { this.vakken = vakken;}
 
     public Vak[] getVakken() {
@@ -40,5 +45,9 @@ public class Rapport {
         for (int i = 0; i < vakken.length; i++) if(vakken[i].getScore() > 10) vakkengeslaagd++;
         if(vakkengeslaagd == vakken.length) return true;
         else return false;
+    }
+
+    public void setVakken(Vak[] vakken) {
+        this.vakken = vakken;
     }
 }

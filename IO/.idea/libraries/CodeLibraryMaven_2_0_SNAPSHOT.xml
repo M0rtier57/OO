@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="CodeLibraryMaven-2.0-SNAPSHOT">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/main/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/src/main/lib" recursive="false" />
+  </library>
+</component>

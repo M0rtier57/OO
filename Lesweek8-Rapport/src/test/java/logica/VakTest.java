@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author kristien.vanassche
- * @version 24/04/2021
+ * @version 02/05/2022
  */
 class VakTest {
     private Class myClass;
@@ -22,6 +22,18 @@ class VakTest {
         vak1 = new Vak("Wiskunde", 3);
         vak2 = new Vak("Fysica", 4);
         vak3 = new Vak("Chemie");
+    }
+
+    @Test
+    public void testExtraNavKleineAanpassingenVoorLabo9() {
+        Vak vakCopy = new Vak(vak1);
+        assertEquals("Wiskunde", vakCopy.getNaam());
+        assertEquals(3, vakCopy.getStp());
+        assertEquals(0, vakCopy.getScore());
+        vak1.setScore(12);
+        vakCopy.setScore(14);
+        assertEquals(12, vak1.getScore());
+        assertEquals(14, vakCopy.getScore());
     }
 
     @Test
@@ -56,6 +68,13 @@ class VakTest {
         assertEquals(0, vak3.getStp());
         vak3.setStp(6);
         assertEquals(6, vak3.getStp());
+    }
+
+    @Test
+    void testSettersExtra() {
+        assertEquals(0, vak1.getScore());
+        assertThrows(IllegalArgumentException.class, () -> vak1.setScore(-10));
+        assertEquals(0, vak1.getScore());
     }
 
     @Test
@@ -115,14 +134,15 @@ class VakTest {
 
     @Test
     public void testConstructor() {
-        assertTrue(myClass.getDeclaredConstructors().length >= 2);
+        assertTrue(myClass.getDeclaredConstructors().length >= 3);
 
         for (Constructor constr : myClass.getDeclaredConstructors()) {
             Class[] parameterTypes = constr.getParameterTypes();
             switch(constr.getParameterCount()) {
                 case 1:
                     assertEquals(1, parameterTypes.length);
-                    assertEquals("java.lang.String", parameterTypes[0].getTypeName());
+                    assertTrue(parameterTypes[0].getTypeName().equals("java.lang.String")
+                                        || parameterTypes[0].getTypeName().equals("logica.Vak"));
                     break;
                 case 2:
                     assertEquals(2, parameterTypes.length);

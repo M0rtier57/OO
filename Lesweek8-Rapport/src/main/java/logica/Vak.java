@@ -31,6 +31,11 @@ public class Vak {
         }
     }
 
+    public Vak(Vak vak) {
+        this.naam = vak.getNaam();
+        this.stp = vak.getStp();
+    }
+
     public String getNaam() {
         return this.naam;
     }
@@ -48,7 +53,8 @@ public class Vak {
     }
 
     public void setScore(int score) {
-        this.score = score;
+        if(score >= 0 && score <= MAX_SCORE) this.score = score;
+        else throw new IllegalArgumentException();
     }
 
     @Override

@@ -1,17 +1,19 @@
 package logica;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-
-import org.junit.jupiter.api.Test;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author kristien.vanassche
- * @version 23-03-2020
+ * @version 02-05-2022
  */
 public class RapportTest {
     private Class myClass;
@@ -23,6 +25,26 @@ public class RapportTest {
         myClass = Class.forName("logica.Rapport");
         r = new Rapport(new Vak[]{new Vak("a", 2), new Vak("b", 2), new Vak("c", 2)});
         r2 = new Rapport(new Vak[]{new Vak("a", 4), new Vak("b", 2), new Vak("c", 2)});
+    }
+
+    @Test
+    public void testExtraVoorbereidendeAanpassingenVoorLabo9() {
+        Rapport r = new Rapport();
+        assertEquals(0, r.getVakken().length);
+        assertEquals(0, r.geefGewogenResultaatProcent());
+        assertEquals(Graad.NIET_GESLAAGD, r.geefGraad());
+
+        r.setVakken(new Vak[6]);
+        assertEquals(6, r.getVakken().length);
+        Arrays.stream(r.getVakken()).forEach(Assertions::assertNull);
+
+        Vak[] concreteRij = new Vak[10];
+        Arrays.fill(concreteRij, new Vak("x"));
+        r.setVakken(concreteRij);
+        assertEquals(10, r.getVakken().length);
+        Arrays.stream(r.getVakken()).forEach(v -> assertEquals("x", v.getNaam()));
+
+        assertEquals(6, Graad.values().length);
     }
 
     @Test
@@ -140,14 +162,18 @@ public class RapportTest {
         int countMeth = myClass.getDeclaredMethods().length;
 
         int countMethPriv = 0;
+        int countMethPub = 0;
         for (Method f : myClass.getDeclaredMethods()) {
             if ((f.getModifiers() & Modifier.PRIVATE) != 0) {
                 countMethPriv++;
+            } else if ((f.getModifiers() & Modifier.PUBLIC) != 0) {
+                countMethPub++;
             }
         }
         System.out.println("-->> Je hebt " + countMeth + " methoden gedefinieerd, waarvan " + countMethPriv + " private.");
-        assertEquals(5, countMeth);
-        assertEquals(1, countMethPriv);
+        assertTrue(countMeth >= 6);
+        assertTrue(countMethPriv >= 1);
+        assertEquals( 5, countMethPub);
     }
 
     @Test
